@@ -1,13 +1,12 @@
-# Project scripts
+# プロジェクト用スクリプト
 
-This directory is reserved for small, reviewed helper scripts for source checks, build setup, artifact checksums, and validation.
+このディレクトリは、ソース確認、ビルド環境の準備、成果物のチェックサム計算、検証などを行う補助スクリプトを管理する場所です。
 
-Guidelines:
+## 作成時の方針
+- 何度実行しても安全なスクリプトを優先する。
+- 各スクリプトに、必要な引数と実行による影響を説明する。
+- 認証情報、個人固有のパス、破壊的な操作を行うコマンドを直接埋め込まない。
+- 対象機器と復元手段を確認するまでは、書き込み処理を自動化しない。
+- 実際に使用するホストOSでテストし、結果を記録する。
 
-- Prefer scripts that are safe to rerun.
-- Explain required arguments and side effects in each script.
-- Do not hard-code credentials, personal paths, or device-specific destructive commands.
-- Never automate flashing until the target and recovery path are verified.
-- Test scripts on the intended host OS and record the result.
-
-No executable build or flashing scripts are provided yet.
+現時点では、ビルドや書き込みを実行するスクリプトはまだ用意していません。
