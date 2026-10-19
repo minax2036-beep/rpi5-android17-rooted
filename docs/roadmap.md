@@ -1,55 +1,49 @@
-# Project roadmap
+# 開発ロードマップ
 
-This roadmap is a plan, not a statement that any stage has already succeeded.
+これは今後の作業計画です。各段階がすでに成功していることを示すものではありません。
 
-## Stage 0 — Establish sources and constraints
+## 段階 0 — ソースと制約の確認
+- [ ] 保守されている Android 17 のソースツリーと正確なブランチ／タグを特定する。
+- [ ] Raspberry Pi 5 用デバイス設定が、そのAndroidバージョンに対応しているか確認する。
+- [ ] 上流リポジトリのURL、コミットID、ライセンス、ビルド手順を記録する。
+- [ ] ビルド用PCのOSを決め、必要なストレージ容量を見積もる。
 
-- [ ] Identify a maintained Android 17 source tree and exact branch/tag.
-- [ ] Confirm the Raspberry Pi 5 device configuration supports that Android version.
-- [ ] Record upstream repository URLs, commit IDs, licenses, and build instructions.
-- [ ] Decide which host OS will be used and estimate required storage.
+**完了条件：** ソースのリビジョンが特定され、ビルド環境が文書化されている。
 
-**Exit condition:** source revisions and a documented build environment are pinned.
+## 段階 1 — 標準ビルド
+- [ ] 文書化したソースツリーを同期する。
+- [ ] 必要なホスト側パッケージを導入し、ビルド環境を設定する。
+- [ ] root化やリカバリ変更を加えず、上流の手順でビルドする。
+- [ ] エラー、所要時間、生成ファイル名、チェックサムを記録する。
 
-## Stage 1 — Build an unmodified baseline
+**完了条件：** 標準イメージを再現可能な手順でビルドできる。
 
-- [ ] Sync the documented source tree.
-- [ ] Install required host packages and configure build variables.
-- [ ] Run the upstream build command without root/recovery modifications.
-- [ ] Record failures, build duration, output artifact names, and checksums.
+## 段階 2 — 起動と基本動作の確認
+- [ ] Raspberry Pi 5 の資料に照らして、イメージ形式と起動手順を確認する。
+- [ ] 可能なら予備のストレージで起動テストする。
+- [ ] 画面、入力、ネットワーク、音声、USB、温度などを記録する。
+- [ ] 正常な状態へ戻せる手段を確保する。
 
-**Exit condition:** a baseline image builds reproducibly.
+**完了条件：** 標準イメージの起動と主要なハードウェア動作が記録されている。
 
-## Stage 2 — Boot and validate
+## 段階 3 — KernelSU Next の調査
+- [ ] カーネルのソース、バージョン、設定、ブートイメージ形式を特定する。
+- [ ] KernelSU Next が現在サポートする導入方式を確認する。
+- [ ] ベースラインを保持し、別ブランチで変更する。
+- [ ] 起動後にroot状態と基本的な安定性を検証する。
 
-- [ ] Verify the image format and boot procedure against Raspberry Pi 5 documentation.
-- [ ] Test boot with a spare storage device where possible.
-- [ ] Record display, input, networking, audio, USB, and thermal behavior.
-- [ ] Keep a known-good recovery path.
+**完了条件：** 対象ビルドで互換性を実証するか、障害条件を記録する。
 
-**Exit condition:** baseline boot and essential hardware checks are documented.
+## 段階 4 — リカバリ環境の調査
+- [ ] Raspberry Pi 5 と対象Androidビルドを明示的にサポートする既存リカバリがあるか確認する。
+- [ ] 対応するものがなければ移植条件を調査し、未テストのイメージをTWRP対応済みと表記しない。
+- [ ] パーティション構成、起動方式、画面・入力対応、復元手順を記録する。
+- [ ] 対象機種用であることと復元手段を確認してからテストする。
 
-## Stage 3 — KernelSU Next investigation
+**完了条件：** 対応を確認する、移植を検証する、または利用可能なリカバリがないことを記録する。
 
-- [ ] Identify the exact kernel source, version, configuration, and boot image format.
-- [ ] Check KernelSU Next's current supported integration methods.
-- [ ] Make changes on a separate branch and preserve the baseline artifacts.
-- [ ] Verify root status and basic stability after boot.
-
-**Exit condition:** compatibility is demonstrated on the exact build, or blockers are documented.
-
-## Stage 4 — Recovery investigation
-
-- [ ] Check whether an existing recovery explicitly supports Raspberry Pi 5 and the chosen Android build.
-- [ ] If not, research the requirements for a port; do not label an untested image as TWRP.
-- [ ] Document partition mapping, boot flow, display/input support, and recovery/restore procedure.
-- [ ] Test only with a verified device-specific image and a known-good restore path.
-
-**Exit condition:** support is verified, a port is validated, or the project records that no usable recovery is available.
-
-## Stage 5 — Reproducibility and release
-
-- [ ] Document exact source revisions and commands.
-- [ ] Add checksums for published artifacts.
-- [ ] Add build/test automation only after the baseline workflow is reliable.
-- [ ] Review licenses and distribution requirements for every included component.
+## 段階 5 — 再現性と公開準備
+- [ ] 正確なソースリビジョンとコマンドを文書化する。
+- [ ] 公開する成果物にチェックサムを付ける。
+- [ ] 標準ビルド手順が安定してから自動化を追加する。
+- [ ] 各コンポーネントのライセンスと配布条件を確認する。
