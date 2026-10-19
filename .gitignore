@@ -1,0 +1,52 @@
+# Host/editor noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+.idea/
+.vscode/
+*.iml
+
+# Android / Gradle outputs
+.gradle/
+**/build/
+local.properties
+.externalNativeBuild/
+.cxx/
+captures/
+
+# AOSP build outputs and caches
+/out/
+/out-*/
+ccache/
+.cache/
+bazel-*/
+
+# Generated Android images and archives (keep source/configuration in Git)
+*.img
+*.img.xz
+*.img.gz
+*.sparse
+*.sparsechunk.*
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# Logs and crash dumps
+*.log
+*.dump
+hs_err_pid*
+
+# Credentials / local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.jks
