@@ -1,12 +1,12 @@
-# Source manifests
+# ソースマニフェスト
 
-This directory is reserved for project-owned manifest files and source revision records.
+このディレクトリは、プロジェクト独自のマニフェストファイルやソースリビジョンの記録を管理する場所です。
 
-Before adding a manifest:
+マニフェストを追加する前に、次の点を確認してください。
 
-1. Confirm the upstream repositories and branch names.
-2. Pin revisions when a reproducible baseline has been established.
-3. Record the source and license for each imported manifest.
-4. Do not copy a manifest from another Android version without checking compatibility.
+1. 上流リポジトリとブランチ名が正しいことを確認する。
+2. 再現可能なベースラインが確立したら、使用するリビジョンを固定する。
+3. 取り込んだマニフェストの出典とライセンスを記録する。
+4. Androidの別バージョン向けマニフェストを、互換性を確認せずにコピーしない。
 
-No custom manifest is committed yet. See [build environment notes](../docs/build-environment.md).
+現時点では、独自のマニフェストはまだ追加していません。[ビルド環境メモ](../docs/build-environment.md)も参照してください。
