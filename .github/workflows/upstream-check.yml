@@ -1,0 +1,63 @@
+name: Android 17 upstream checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-upstream:
+    name: Check upstream source references
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Check required project documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in README.md docs/roadmap.md docs/build-environment.md docs/source-study.md; do
+            if [[ ! -s "$file" ]]; then
+              echo "::error::Required file is missing or empty: $file"
+              exit 1
+            fi
+            echo "OK: $file"
+          done
+
+      - name: Check Android 17 upstream branches
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          check_branch() {
+            local repo="$1"
+            local branch="$2"
+            echo "Checking $repo ($branch)"
+            if git ls-remote --exit-code --heads "https://github.com/$repo.git" "refs/heads/$branch" >/dev/null; then
+              echo "OK: $repo has branch $branch"
+            else
+              echo "::error::Could not confirm branch $branch in $repo"
+              return 1
+            fi
+          }
+
+          check_branch "raspberry-vanilla/android_device_brcm_rpi5" "android-17.0"
+          check_branch "raspberry-vanilla/android_local_manifest" "android-17.0"
+          check_branch "raspberry-vanilla/android_kernel_manifest" "android-17.0"
+
+      - name: Check local manifest URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://raw.githubusercontent.com/raspberry-vanilla/android_local_manifest/android-17.0/manifest_brcm_rpi.xml"
+          curl --fail --location --silent --show-error "$url" -o /tmp/manifest_brcm_rpi.xml
+          test -s /tmp/manifest_brcm_rpi.xml
+          echo "OK: Android 17 Raspberry Pi local manifest is reachable"
+          head -n 5 /tmp/manifest_brcm_rpi.xml
