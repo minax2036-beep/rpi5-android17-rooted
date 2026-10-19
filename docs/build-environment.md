@@ -1,43 +1,39 @@
-# Build environment notes
+# ビルド環境メモ
 
-Fill this in after choosing the actual build host. Do not treat the checklist as a tested recipe yet.
+実際に使用するビルド用PCを決めてから記入してください。以下は確認用チェックリストであり、動作確認済みの手順ではありません。
 
-## Host details
+## ホスト環境
+- ホストOSとバージョン：未確認
+- CPUアーキテクチャ：未確認
+- メモリ容量：未確認
+- 空きディスク容量：未確認
+- ファイルシステム：未確認
+- Androidソースのブランチ／タグ：未確認
+- デバイス設定リポジトリとリビジョン：未確認
+- カーネルのソースとリビジョン：未確認
 
-- Host OS and version: TBD
-- CPU architecture: TBD
-- RAM: TBD
-- Free disk space: TBD
-- Filesystem: TBD
-- Android source branch/tag: TBD
-- Device configuration repository and revision: TBD
-- Kernel source and revision: TBD
+## ビルド前の確認
+- [ ] 選択したAOSPブランチがホストOSをサポートしていることを確認する。
+- [ ] 上流の資料に従い、必要なJDK、Python、コンパイラ、ビルドツールを確認する。
+- [ ] ソース、ビルド出力、キャッシュ用の空き容量を確保する。
+- [ ] ソース同期に十分なネットワーク接続を用意する。
+- [ ] マニフェストとソースの正確なリビジョンを記録する。
+- [ ] ビルド出力とキャッシュをGit管理対象の外に置く。
 
-## Pre-build checklist
+## ビルド記録テンプレート
+ビルドを試すたびに、次の項目を記録してください。
 
-- [ ] Confirm the host OS is supported by the selected AOSP branch.
-- [ ] Confirm the required JDK, Python, compiler, and build tools from upstream documentation.
-- [ ] Ensure enough free storage for the source tree, build output, and cache.
-- [ ] Use a stable network connection for source sync.
-- [ ] Record the exact manifest and source revisions.
-- [ ] Keep build output and caches outside version control.
+- 日付：
+- ホストOS：
+- ソースマニフェスト／リビジョン：
+- デバイスツリーのリビジョン：
+- カーネルのリビジョン：
+- 実行したコマンド：
+- 結果：
+- 最初に発生した重要なエラー：
+- 生成されたファイル：
+- SHA-256：
+- 備考：
 
-## Build log template
-
-For each attempt, record:
-
-- Date:
-- Host OS:
-- Source manifest/revision:
-- Device tree revision:
-- Kernel revision:
-- Command used:
-- Result:
-- First meaningful error:
-- Output artifact(s):
-- SHA-256:
-- Notes:
-
-## Important
-
-The correct commands depend on the upstream project and branch. Do not copy build commands from another Android release without verifying them against the selected source tree.
+## 注意
+正しいコマンドは、使用する上流プロジェクトとブランチによって異なります。選択したソースツリーで確認せずに、別のAndroidバージョン向けのビルドコマンドを流用しないでください。
